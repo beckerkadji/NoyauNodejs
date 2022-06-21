@@ -2,11 +2,8 @@ import { Body, Get, Post, Route, Tags } from "tsoa";
 
 import {  My_Controller } from "./controller";
 import UserType from "../types/userType";
+import { userSchema } from "../validations/user.validation";
 
-// interface UserType {
-//     name : string;
-//     age : number
-// }
 
 @Tags("User Controller")
 @Route("/user")
@@ -17,9 +14,9 @@ export class UserController extends My_Controller {
         @Body() body : UserType.userCreateFields
     ): Promise<any> {
         try {
-            console.log(body);
+            this.validate(userSchema, body)
 
-            return body;
+            return
 
         }catch(e){
             console.error(e)
