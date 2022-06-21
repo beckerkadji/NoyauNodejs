@@ -2,7 +2,7 @@ import { defaultAge } from "./defaults/age.type"
 import { defaultFisrtName } from "./defaults/firstName.type"
 import { defaultLastName } from "./defaults/lastName.type"
 
-namespace UserType {
+declare namespace UserType {
     export interface userCreateFields {
         firstName : defaultFisrtName,
         lastName : defaultLastName,
@@ -10,3 +10,4 @@ namespace UserType {
     }
 }
 export default UserType
+

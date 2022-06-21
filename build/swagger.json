@@ -6,18 +6,37 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Iuser": {
+			"defaultFisrtName": {
+				"type": "string",
+				"example": "firstName",
+				"description": "Field for name"
+			},
+			"defaultLastName": {
+				"type": "string",
+				"example": "lastName",
+				"description": "Field for lastName"
+			},
+			"defaultAge": {
+				"type": "number",
+				"format": "double",
+				"example": 22,
+				"description": "Field for age"
+			},
+			"UserType.userCreateFields": {
 				"properties": {
-					"name": {
-						"type": "string"
+					"firstName": {
+						"$ref": "#/components/schemas/defaultFisrtName"
+					},
+					"lastName": {
+						"$ref": "#/components/schemas/defaultLastName"
 					},
 					"age": {
-						"type": "number",
-						"format": "double"
+						"$ref": "#/components/schemas/defaultAge"
 					}
 				},
 				"required": [
-					"name",
+					"firstName",
+					"lastName",
 					"age"
 				],
 				"type": "object",
@@ -37,45 +56,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/post": {
-			"get": {
-				"operationId": "GetALL",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Post Controller"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
 		"/user": {
-			"get": {
-				"operationId": "GetALL",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {}
-							}
-						}
-					}
-				},
-				"tags": [
-					"User Controller"
-				],
-				"security": [],
-				"parameters": []
-			},
 			"post": {
 				"operationId": "Create",
 				"responses": {
@@ -98,11 +79,29 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Iuser"
+								"$ref": "#/components/schemas/UserType.userCreateFields"
 							}
 						}
 					}
 				}
+			},
+			"get": {
+				"operationId": "GetALL",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User Controller"
+				],
+				"security": [],
+				"parameters": []
 			}
 		}
 	},
