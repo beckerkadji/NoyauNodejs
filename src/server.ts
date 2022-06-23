@@ -41,7 +41,7 @@ RegisterRoutes(app)
 
 //Response configuration
 app.use(Response.errorHandlerValidation)
-app.use(Response.notFoundHandler)
+//app.use(Response.notFoundHandler)
 
 
 try {

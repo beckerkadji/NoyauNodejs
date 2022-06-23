@@ -6,8 +6,8 @@ export const schema = {
         .required()
         .min(8)
         .pattern(new RegExp(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/)),
-    firstName : Joi.string().required().min(2),
-    lastName : Joi.string().optional(),
+    firstName : Joi.string().min(2).required(),
+    lastName : Joi.string().min(2).optional(),
     phone : Joi.string().required().min(9),
     id : Joi.number().required(),
     age : Joi.number().min(1).max(100)

@@ -10,6 +10,16 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "IResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "code": {"dataType":"double","required":true},
+            "message": {"dataType":"string"},
+            "data": {"dataType":"any"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "defaultFisrtName": {
         "dataType": "refAlias",
         "type": {"dataType":"string","validators":{}},
@@ -20,17 +30,17 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"string","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "defaultAge": {
+    "defaultEmail": {
         "dataType": "refAlias",
-        "type": {"dataType":"double","validators":{}},
+        "type": {"dataType":"string","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UserType.userCreateFields": {
         "dataType": "refObject",
         "properties": {
             "firstName": {"ref":"defaultFisrtName","required":true},
-            "lastName": {"ref":"defaultLastName","required":true},
-            "age": {"ref":"defaultAge","required":true},
+            "lastName": {"ref":"defaultLastName"},
+            "email": {"ref":"defaultEmail","required":true},
         },
         "additionalProperties": false,
     },
@@ -64,30 +74,6 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.create.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/user',
-            ...(fetchMiddlewares<RequestHandler>(UserController)),
-            ...(fetchMiddlewares<RequestHandler>(UserController.prototype.getALL)),
-
-            function UserController_getALL(request: any, response: any, next: any) {
-            const args = {
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const controller = new UserController();
-
-
-              const promise = controller.getALL.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

@@ -1,46 +1,34 @@
 import { Body, Get, Post, Route, Tags } from "tsoa";
-
-import {  My_Controller } from "./controller";
+import {  IResponse, My_Controller } from "./controller";
 import UserType from "../types/userType";
 import { userSchema } from "../validations/user.validation";
-
+import { User } from "../models/user";
+import { ResponseHandler } from "../../src/config/responseHandler";
+import code from "../../src/config/code";
+const response = new ResponseHandler()
 
 @Tags("User Controller")
 @Route("/user")
+
 export class UserController extends My_Controller {
 
     @Post("")
     public async create(
         @Body() body : UserType.userCreateFields
-    ): Promise<any> {
+    ): Promise<IResponse> {
         try {
-            this.validate(userSchema, body)
+           const validate =  this.validate(userSchema, body)
+           if(validate !== true)
+               return response.liteResponse(code.VALIDATION_ERROR, 'Validation error', validate)
+           
+            let userCreate = await User.create({data : body});
+            if(!userCreate)
+                return response.liteResponse(code.FAILD, "Error occured during creation, try again", null)
 
-            return
-
+            return response.liteResponse(code.SUCCESS, "User created with success !", body)
         }catch(e){
-            console.error(e)
+            return response.catchHandler(e)
         }
 
     }
-    @Get("")
-    public async getALL() : Promise<any> {
-        try {
-            const data : any = [
-                {   
-                     "nom" : "becker",
-                     "age" : 21
-                },
-                {
-                    "nom" : "becker",
-                    "age" : 21
-                } 
-            ]
-            console.log(data)
-            return data
-
-        }catch(e){
-            console.error(e)
-        }
-    } 
 }

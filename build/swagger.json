@@ -6,6 +6,23 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"IResponse": {
+				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"code"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"defaultFisrtName": {
 				"type": "string",
 				"example": "firstName",
@@ -16,11 +33,10 @@
 				"example": "lastName",
 				"description": "Field for lastName"
 			},
-			"defaultAge": {
-				"type": "number",
-				"format": "double",
-				"example": 22,
-				"description": "Field for age"
+			"defaultEmail": {
+				"type": "string",
+				"example": "kadjibecker@gmail.com",
+				"description": "Field for name"
 			},
 			"UserType.userCreateFields": {
 				"properties": {
@@ -30,14 +46,13 @@
 					"lastName": {
 						"$ref": "#/components/schemas/defaultLastName"
 					},
-					"age": {
-						"$ref": "#/components/schemas/defaultAge"
+					"email": {
+						"$ref": "#/components/schemas/defaultEmail"
 					}
 				},
 				"required": [
 					"firstName",
-					"lastName",
-					"age"
+					"email"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -64,7 +79,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
 							}
 						}
 					}
@@ -84,24 +101,6 @@
 						}
 					}
 				}
-			},
-			"get": {
-				"operationId": "GetALL",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {}
-							}
-						}
-					}
-				},
-				"tags": [
-					"User Controller"
-				],
-				"security": [],
-				"parameters": []
 			}
 		}
 	},
