@@ -4,7 +4,22 @@
     "controllerPathGlobs": ["./app/controllers/*controller.ts"],
     "spec": {
         "outputDirectory": "build",
-        "specVersion": 3
+        "specVersion": 3,
+        "paths": {
+            "/files/uploadFile": {
+                "post": {
+                    "consumes": [
+                        "multipart/form-data"
+                    ],
+                    "parameters": [{
+                        "in": "formData",
+                        "name": "randomFileIsHere",
+                        "required": true,
+                        "type": "file"
+                    }]
+                }
+            }
+        }
     },
     "routes": {
         "routesDir": "./router",

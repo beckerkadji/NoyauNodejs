@@ -10,6 +10,9 @@ export const schema = {
     lastName : Joi.string().min(2).optional(),
     phone : Joi.string().required().min(9),
     id : Joi.number().required(),
-    age : Joi.number().min(1).max(100)
+    age : Joi.number().min(1).max(100),
+    title : Joi.string().required(),
+    description : Joi.string().required(),
+    image : Joi.string().required(),
 }
     

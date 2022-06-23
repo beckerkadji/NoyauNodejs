@@ -1,3 +1,5 @@
+import { any } from "joi";
+import multer from "multer";
 import { Controller } from "tsoa";
 import { ValidateError } from "tsoa";
 
@@ -27,6 +29,22 @@ export class My_Controller extends Controller {
         }
         
     }
+
+    public async uploadFile (file : Express.Multer.File) : Promise <any>{
+        const storage  = multer.diskStorage({
+            destination: (req, file, cb) => {
+                cb(null, 'tmp/upload')
+            },
+            filename : (req, file, cb) => {
+                
+            }
+        })
+
+        const upload = multer({ storage: storage})
+        return upload
+    }
+
+
 
    
 }

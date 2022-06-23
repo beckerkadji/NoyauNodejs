@@ -71,6 +71,55 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/post": {
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post Controller"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"title": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"image": {
+										"type": "string",
+										"format": "binary"
+									}
+								},
+								"required": [
+									"title",
+									"description",
+									"image"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
 		"/user": {
 			"post": {
 				"operationId": "Create",
