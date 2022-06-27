@@ -15,14 +15,13 @@ export class postController extends My_Controller {
     public async create(
         @FormField() title : string,
         @FormField() description : string,
-        @UploadedFile() image : Express.Multer.File,
+        @UploadedFile() image : any
     ): Promise<IResponse> {
         try {
         //    const validate =  this.validate(postSchema, body)
         //    if(validate !== true)
         //        return response.liteResponse(code.VALIDATION_ERROR, 'Validation error', validate)
         let uploaded = await this.uploadFile(image)
-        console.log("upload", uploaded)
             
             
             return response.liteResponse(code.SUCCESS, "User created with success !", )
