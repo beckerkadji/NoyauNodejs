@@ -22,6 +22,7 @@ export class postController extends My_Controller {
         //    if(validate !== true)
         //        return response.liteResponse(code.VALIDATION_ERROR, 'Validation error', validate)
         let uploaded = await this.uploadFile(image)
+       
             
             
             return response.liteResponse(code.SUCCESS, "User created with success !", )
