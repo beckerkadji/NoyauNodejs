@@ -59,7 +59,7 @@ export function RegisterRoutes(app: express.Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.post('/post',
+        app.post('/post/single',
             upload.single('image'),
             ...(fetchMiddlewares<RequestHandler>(postController)),
             ...(fetchMiddlewares<RequestHandler>(postController.prototype.create)),
@@ -81,6 +81,34 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.create.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/post/multiple',
+            upload.array('image'),
+            ...(fetchMiddlewares<RequestHandler>(postController)),
+            ...(fetchMiddlewares<RequestHandler>(postController.prototype.createMultiple)),
+
+            function postController_createMultiple(request: any, response: any, next: any) {
+            const args = {
+                    title: {"in":"formData","name":"title","required":true,"dataType":"string"},
+                    description: {"in":"formData","name":"description","required":true,"dataType":"string"},
+                    image: {"in":"formData","name":"image","required":true,"dataType":"array","array":{"dataType":"file"}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new postController();
+
+
+              const promise = controller.createMultiple.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

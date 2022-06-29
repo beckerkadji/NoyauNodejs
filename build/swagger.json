@@ -71,7 +71,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/post": {
+		"/post/single": {
 			"post": {
 				"operationId": "Create",
 				"responses": {
@@ -107,6 +107,58 @@
 									"image": {
 										"type": "string",
 										"format": "binary"
+									}
+								},
+								"required": [
+									"title",
+									"description",
+									"image"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/post/multiple": {
+			"post": {
+				"operationId": "CreateMultiple",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post Controller"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"title": {
+										"type": "string"
+									},
+									"description": {
+										"type": "string"
+									},
+									"image": {
+										"items": {
+											"type": "string",
+											"format": "binary"
+										},
+										"type": "array"
 									}
 								},
 								"required": [

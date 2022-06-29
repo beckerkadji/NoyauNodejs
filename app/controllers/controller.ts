@@ -40,12 +40,35 @@ export class My_Controller extends Controller {
         
     }
 
-    public async uploadFile (file : Express.Multer.File) : Promise <any>{
+    /**
+     * 
+     * @param file 
+     * @returns Array of url for multiple upload file or url for single file upload
+     */
+    public async uploadFile (file : Express.Multer.File) : Promise<any> {
+
+        if (Array.isArray(file)){
+            const urls : any = [];
+            for (const item of file){
+                const newPath = await this.cloudinaryImageUploadMethod(item)
+                console.log("newPath", newPath)
+                urls.push(newPath)
+            }
+            
+            return urls
+        }else {
+           const url = await this.cloudinaryImageUploadMethod(file)
+           return url;
+        }
+
+    }  
+
+    private async cloudinaryImageUploadMethod(file : any) : Promise<any> {
 
         return new Promise((resolve, rejects) => {
 
             //Check extension for upload file
-            // if(image.mimetype !== ('image/jpg' || 'image/jpeg' || 'image/png')) {
+            // if(file.mimetype !== ('image/jpg' || 'image/jpeg' || 'image/png')) {
             //     rejects('You must upload jpg, jpeg or png file !');
             // }
 
@@ -73,7 +96,6 @@ export class My_Controller extends Controller {
             })
             streamifier.createReadStream(file.buffer).pipe(uploadStream)
         })
-        
-    }  
+    }
 }
 
