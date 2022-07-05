@@ -60,7 +60,14 @@ export class ResponseHandler {
             response.code = code;
             response.data = data;
             return  response
-        } else {
+        
+        } 
+        else if (code == codeData.FAILD) {
+            response.message = message;
+            response.code = code;
+            response.data = data;
+            return  response
+        }else {
             return {code :this.code, message :this.message, data : this.data}
         }
     }

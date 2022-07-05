@@ -16,7 +16,7 @@ export class postController extends My_Controller {
     public async create(
         @FormField() title : string,
         @FormField() description : string,
-        @UploadedFile() image : Express.Multer.File
+        @UploadedFile() image : any
     ): Promise<IResponse> {
         try {
         //    const validate =  this.validate(postSchema, body)
